@@ -4,3 +4,6 @@
 
 ## 참고자료
 [앤드류 응의 ChatGPT 프롬프트 엔지니어링](https://www.youtube.com/watch?v=P8yKg88xF_8)
+
+### prompt-engineering.ipynb
+앤드류 응의 'ChatGPT 프롬프트 엔지니어링'의 실습코드입니다.
