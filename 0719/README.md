@@ -2,7 +2,7 @@
 
 > Culbot을 학습시키기 위한 과정에 대해서 정리하였습니다.
 
-# Cullbot(Chungbuk national university large language model-based chatbot)
+# Culbot(Chungbuk national university large language model-based chatbot)
 
 ## Example
 ![example](example.png)
@@ -10,7 +10,7 @@
 
 ## Foundation Model 
 
-Cullbot 은 Foudataion Model로 [Polyglot-ko-12.8B](https://huggingface.co/EleutherAI/polyglot-ko-12.8b)를 사용하여 학습을 진행했습니다.
+Culbot 은 Foudataion Model로 [Polyglot-ko-12.8B](https://huggingface.co/EleutherAI/polyglot-ko-12.8b)를 사용하여 학습을 진행했습니다.
 
 ## Model repository
 
@@ -59,7 +59,7 @@ QA set 은 충북대학교 홈페이지에 있는 정보글을 바탕으로 GPT3
  
  ## Training with lora
 
-Cullbot은 Polyglot 12.8B 모델을 Low Rank Adaptation (LoRA)를 사용하여 학습하였습니다.
+Culbot은 Polyglot 12.8B 모델을 Low Rank Adaptation (LoRA)를 사용하여 학습하였습니다.
 모델 학습은 A100 80GB 4대로 진행했습니다. 학습에 사용한 코드는 [tloen/alpaca-lora](https://github.com/tloen/alpaca-lora)을 기반으로 사용하였습니다.
 
 ### Denpendency
