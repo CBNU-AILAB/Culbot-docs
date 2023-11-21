@@ -4,6 +4,9 @@
 
 [별도로 정리한 블로그](https://velog.io/@yeongsang2/babyagi-Agent-ai)
 
+### babyagi.py
+babyagi를 코드분석하면서 알아낸 내용을 작성한 주석문과 프롬프트 한글 번역한 코드입니다.
+
 ## 참고자료
 1. https://github.com/yoheinakajima/babyagi   
 2. https://docs.kanaries.net/ko/articles/babyagi-chatgpt
