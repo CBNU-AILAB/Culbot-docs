@@ -8,3 +8,7 @@ NaLLM 코드 분석을 하면서 작성한 주석문이 담긴 코드입니다.
 
 ### 데모 실행 화면
 ![img.png](img.png)
+
+## 참고자료
+1. https://medium.com/neo4j/knowledge-graph-based-chatbot-with-gpt-3-and-neo4j-c4ebbd325ed
+2. https://arxiv.org/abs/2304.13007

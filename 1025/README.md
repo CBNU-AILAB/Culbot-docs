@@ -4,3 +4,7 @@
 
 ### noun.ipynb
 데이터에서 명사를 추출하는 방식에 대해 정리된 코드입니다.
+
+## 참고자료
+1. https://llava-vl.github.io/
+2. https://arxiv.org/abs/2304.08485

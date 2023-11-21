@@ -4,3 +4,7 @@
 
 ### demo.py
 Culbot의 데모와 관련된 코드입니다.
+
+## 참고자료
+1. https://next-gpt.github.io/
+2. https://arxiv.org/pdf/2309.05519.pdf

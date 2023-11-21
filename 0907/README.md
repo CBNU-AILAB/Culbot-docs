@@ -8,3 +8,7 @@ RAG 관련 임베딩, 쿼리 관련 코드가 정리되어었습니다.
 ### chatGPT_ft.ipynb
 ChatGPT 파인튜닝과 관련된 코드가 정리되어 있습니다.
 **참고 - API 사용방식이 많이 변경되어 코드가 정상 작동 하지 않을 수 있습니다.**
+
+## 참고자료
+1. https://arxiv.org/abs/2308.12950
+2. https://youtu.be/tRe2XHF6UbQ?si=9OhBkg_8qCr2b9bx
