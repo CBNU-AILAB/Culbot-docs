@@ -22,7 +22,7 @@ passwd: ****
     nvidia-smi
 ```
 해당 명령어를 통해 GPU가 잘 세팅되어있는지 확인할 수 있습니다.
-[!gpu](./gpu.png)
+![gpu](./gpu.png)
 
 #### Enviroment
 * Ubuntu 20.04 LTS
