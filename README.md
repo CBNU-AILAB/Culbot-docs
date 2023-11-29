@@ -24,3 +24,4 @@
 * [LLava && KG with Cultbot](./1025/)
 * [NextGPT](./1102/)
 * [ToolFormer](./1116)
+* [Culbot Training final](./culbot_training/)
