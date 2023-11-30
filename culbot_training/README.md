@@ -1,9 +1,18 @@
 # Culbot Training
 ## 목차
-1. [Enviroment](#enviroment)
-2. [Data](#Data)
-3. [Training](#Training)
-4. [RAG](#RAG)
+1. [Enviroment](#enviroment) <br>
+1.1 [public cloud](#public-cloud) <br>
+1.2 [public cloud](#public-cloud)
+2. [Data](#Data) <br>
+2.1 [Dataset](#dataset) <br>
+2.2 [Data Generation](#data-generation) <br>
+2.3 [Data Collection](#data-collection) <br>
+3. [Training](#Training) <br>
+3.1 [Foundation model](#foundation-model) <br>
+3.2 [Traiing](#training) <br>
+4. [RAG](#RAG) <br>
+4.1 [Rag Data Generation](#rag-data-generation) <br>
+4.2 [How to apply](#how-to-apply) <br>
 5. [Demo](#Demo)
 
 ## Enviroment
