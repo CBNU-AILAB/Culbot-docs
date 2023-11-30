@@ -334,6 +334,7 @@ Culbot은 더 객관성있고 신뢰성있는 답변, 정보제공을 위해 RAG
 해당 문서파일을 압축시킨 파일은 다음과 같습니다.
 * culbot_training/CBNU_DATA.zip
 * culbot_training/combine.zip
+<br>
 combine.zip은 하나의 폴더안에 모든파일이 담겨있는 zip파일입니다. 내용은 같습니다.
 
 ### Rag Data Generation
