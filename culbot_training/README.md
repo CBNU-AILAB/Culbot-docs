@@ -1,7 +1,7 @@
 # Culbot Training
 ## 목차
 1. [Enviroment](#enviroment) <br>
-1.1 [public cloud](#public-cloud) <br>
+1.1 [private cloud](#private-cloud) <br>
 1.2 [public cloud](#public-cloud)
 2. [Data](#Data) <br>
 2.1 [Dataset](#dataset) <br>
