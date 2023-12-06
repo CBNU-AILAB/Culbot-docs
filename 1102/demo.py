@@ -36,24 +36,25 @@ class MyThread1(threading.Thread):
         return self.result
 
 class MyThread2(threading.Thread):
-    def __init__(self, arg1, arg2, arg3):
+    def __init__(self, arg1, arg2):
         super().__init__()
         self.arg1 = arg1
         self.arg2 = arg2
-        self.arg3 = arg3
         self.result = None
 
     def run(self):
         # 스레드에서 실행될 코드
-        self.result = thread2_function(self.arg1, self.arg2, self.arg3)
+        self.result = thread2_function(self.arg1, self.arg2)
 
     def get_result(self):
         return self.result
 
+# 사용자가 엔터 혹은 버튼을 클릭할 경우 실행되는 메서드
 def respond(
     message,
     chat_history,
 ):
+    # 사용자의 키워드를 확인하여 함수를 호출한다.
     if("충북대" in message):
         return respond1(message, chat_history)
     elif("건강" in message):
@@ -61,17 +62,26 @@ def respond(
     else:
         return respond3(message, chat_history)
 
-def thread1_function(medical_question_collection, message, data):
+# 원본 문장에서 유사어를 찾아서 변형된 질문으로 RAG 진행 (원본 문장과 차이가 있다면, 쓰레드 종료)
+def thread1_function(
+    medical_question_collection, # 의료 collection
+    message, # 사용자 질의문
+    data # 유사어 사전
+):
+    # 명사 추출
     nouns = okt.nouns(message)
     sentence = message
     
+
     for noun in nouns:
         item = {}
+        # 사용자 질의문의 명사가 유사어 사전에 존재하는지 탐색
         for idx, obj in enumerate(data):
             if(noun in obj['question_nouns_synonym']):
                 item[noun] = obj['question_nouns']
         print(item)
         
+        # 문장 변형 (의대데이터의 질문에 있던 명사로 사용자 질의문의 명사를 변형)
         if noun in item:
             synonyms = item[noun]
             print(synonyms)
@@ -81,6 +91,7 @@ def thread1_function(medical_question_collection, message, data):
     
     qa_set = ''
 
+    # 쓰레드 종료
     if(message == sentence):
         print("1번 쓰레드: 조건 A를 만족하지 못했습니다. 중단합니다.")
         return qa_set
@@ -95,14 +106,18 @@ def thread1_function(medical_question_collection, message, data):
     question_list = query_result2.question
     answer_list = query_result2.answer
     for q, a  in zip(question_list,answer_list):
-        qa_set += "{} {} /n".format(q,a)
+        qa_set += "{} {} ".format(q,a)
     
     print(sentence)
     print("1번 쓰레드: 조건 A를 만족했습니다.")
     condition_event.set()
     return qa_set
 
-def thread2_function(medical_question_collection, message, data):
+# 원본 문장으로 바로 RAG 진행
+def thread2_function(
+    medical_question_collection, # 의료 collection
+    message, # 사용자 질의문
+):
     print("2번 쓰레드: 시작")
     
     query_result = query_collection(
@@ -116,12 +131,13 @@ def thread2_function(medical_question_collection, message, data):
     answer_list = query_result.answer
     qa_set = ''
     for q, a  in zip(question_list,answer_list):
-        qa_set += "{} {} /n".format(q,a)
+        qa_set += "{} {} ".format(q,a)
 
     print("2번 쓰레드: 끝")
     condition_event.set()
     return qa_set
 
+# collection에서 쿼리를 수행하고 결과를 DataFrame으로 변환하여 반환
 def query_collection(collection, query, max_results, dataframe):
     results = collection.query(query_texts=query, n_results=max_results, include=['distances']) 
     df = pd.DataFrame({
@@ -132,6 +148,7 @@ def query_collection(collection, query, max_results, dataframe):
                 })
     return df
 
+# 키워드에 충북대가 있을때, 충북대 데이터 RAG 결과를 활용하여 문장 생성
 def respond1(
     message,
     chat_history,
@@ -151,11 +168,12 @@ def respond1(
         max_results=3,
         dataframe=df2
     )
+
     qa_set = ''
     question_list = query_result.question
     answer_list = query_result.answer
     for q, a  in zip(question_list,answer_list):
-        qa_set += "{} {} /n".format(q,a)
+        qa_set += "{} {} ".format(q,a)
     print(qa_set)
 
     bot_message = gen(instruction=message, input_text=qa_set)
@@ -165,7 +183,7 @@ def respond1(
 
     return "", chat_history
 
-## 병원
+# 키워드에 건강이 있을 때, 의대 데이터 RAG 결과를 활용하여 문장 생성
 def respond2(
     message,
     chat_history,
@@ -185,7 +203,7 @@ def respond2(
     
     # 스레드 생성
     t1 = MyThread1(medical_question_collection, message, data)
-    t2 = MyThread2(medical_question_collection, message, data)
+    t2 = MyThread2(medical_question_collection, message)
     
     # 스레드 실행
     t1.start()
@@ -210,6 +228,7 @@ def respond2(
 
     return "", chat_history
 
+# 키워드가 없을 때, 단순 문장 생성
 def respond3(
         message,
         chat_history,
@@ -223,14 +242,13 @@ def respond3(
         result = prompter.get_response(s)
         return result
 
-
     bot_message = gen(input_text=message)
     print(bot_message)
     chat_history.append((message, bot_message))
     time.sleep(0.5)
     return "", chat_history
 
-
+## UI 코드
 with gr.Blocks(title="Culbot") as demo:
     gr.Markdown("### Culbot")
     chatbot = gr.Chatbot(height=550)
@@ -250,6 +268,7 @@ with gr.Blocks(title="Culbot") as demo:
     # 엔터키
     msg.submit(respond, [msg, chatbot], [msg,chatbot], "medical")    
 
+## 사전 셋팅 코드
 if __name__ == "__main__":
     gc.collect()
     torch.cuda.empty_cache()
